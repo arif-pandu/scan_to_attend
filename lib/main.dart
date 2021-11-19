@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Scan to Attend",
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: QRViewExample(),
     );
   }
 }
