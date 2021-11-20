@@ -26,28 +26,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     UserValidation userValidation = Get.put(UserValidation());
 
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
-    CollectionReference user = firestore.collection('user');
-
-    String userInput = 'admin1';
-
-    checkUser() async {
-      return await FutureBuilder(
-        future: user.doc(userInput).get(),
-        builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          Map<String, dynamic> data =
-              snapshot.data!.data() as Map<String, dynamic>;
-
-          userValidation.usernameLogin = data['username'];
-
-          print(data['username']);
-          print(data['password']);
-
-          return Text(data['username']);
-        },
-      );
-    }
-
     return Scaffold(
       body: Center(
         child: Padding(

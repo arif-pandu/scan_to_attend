@@ -20,6 +20,7 @@ class _LoginPasswordState extends State<LoginPassword> {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference user = firestore.collection('user');
     String userInput = userValidation.usernameLogin!;
+    Future<DocumentSnapshot<Object?>>? userData = user.doc(userInput).get();
 
     return Scaffold(
       body: Center(
@@ -27,19 +28,30 @@ class _LoginPasswordState extends State<LoginPassword> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FutureBuilder(
-              future: user.doc(userInput).get(),
+              future: userData == null
+                  ? user.doc('unrecognized').get()
+                  : user.doc(userInput).get(),
               builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-                Map<String, dynamic> data =
-                    snapshot.data!.data() as Map<String, dynamic>;
-
-                userValidation.usernameLogin = data['username'];
-
-                print(data['username']);
-                print(data['password']);
+                Map<dynamic, dynamic> data =
+                    snapshot.data!.data() as Map<dynamic, dynamic>;
 
                 return Text(
                   data['username'],
                 );
+
+                //
+                // Map<String, dynamic> data =
+                //     snapshot.data!.data() as Map<String, dynamic>;
+
+                // userValidation.usernameLogin = data['username'];
+
+                // print(data['username']);
+                // print(data['password']);
+
+                // return Text(
+                //   data['username'],
+                // );
+                //
               },
             ),
           ],
