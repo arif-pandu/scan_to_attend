@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "281517621743",
+    "project_id": "scan-to-attend",
+    "storage_bucket": "scan-to-attend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281517621743:android:60c1056f7286b196c0761a",
+        "android_client_info": {
+          "package_name": "com.example.scan_to_attend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281517621743-4fpui983amdlva1cln0it2ejsg3eglaf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY_gqAsXTLfZCpQ5OMODJiLH6fFuOiNs4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281517621743-4fpui983amdlva1cln0it2ejsg3eglaf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
