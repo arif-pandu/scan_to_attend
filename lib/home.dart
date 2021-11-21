@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class QRViewExample extends StatefulWidget {
-  const QRViewExample({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _QRViewExampleState();
+  State<StatefulWidget> createState() => _HomePageState();
 }
 
-class _QRViewExampleState extends State<QRViewExample> {
+class _HomePageState extends State<HomePage> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -54,24 +54,27 @@ class _QRViewExampleState extends State<QRViewExample> {
                     )
                   else
                     const Text('Scan a code'),
-                  Container(
+                  SizedBox(
                     height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                      border: Border.all(
-                        width: 3,
-                        color: Colors.black54,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black87.withOpacity(0.7),
-                          offset: const Offset(0, 0),
-                          spreadRadius: 1,
-                          blurRadius: 1,
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                        border: Border.all(
+                          width: 3,
+                          color: Colors.black54,
                         ),
-                      ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black87.withOpacity(0.7),
+                            offset: const Offset(0, 0),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

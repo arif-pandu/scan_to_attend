@@ -4,4 +4,6 @@ import 'package:get/get.dart';
 class UserValidation extends GetxController {
   String? usernameLogin;
   String? passwordLogin;
+
+  int? userID;
 }
