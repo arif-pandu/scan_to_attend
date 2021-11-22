@@ -6,16 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:scan_to_attend/login/login_password.dart';
-import 'package:scan_to_attend/user_validaton.dart';
+import 'package:scan_to_attend/login_controller.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginUsername extends StatefulWidget {
+  const LoginUsername({Key? key}) : super(key: key);
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginUsernameState createState() => _LoginUsernameState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginUsernameState extends State<LoginUsername> {
   TextEditingController usernameController = TextEditingController();
 
   @override
@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserValidation userValidation = Get.put(UserValidation());
+    LoginController loginController = Get.put(LoginController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -103,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           );
                         } else {
                           setState(() {
-                            userValidation.usernameLogin =
+                            loginController.usernameLogin =
                                 usernameController.text;
                             Get.to(LoginPassword());
                           });

@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scan_to_attend/home.dart';
-import 'package:scan_to_attend/user_validaton.dart';
+import 'package:scan_to_attend/login_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPassword extends StatefulWidget {
@@ -32,10 +32,10 @@ class _LoginPasswordState extends State<LoginPassword> {
 
   @override
   Widget build(BuildContext context) {
-    UserValidation userValidation = Get.put(UserValidation());
+    LoginController loginController = Get.put(LoginController());
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference user = firestore.collection('user');
-    String userInput = userValidation.usernameLogin!;
+    String userInput = loginController.usernameLogin!;
     Future<DocumentSnapshot<Object?>>? userData = user.doc(userInput).get();
 
     return Scaffold(
@@ -56,8 +56,8 @@ class _LoginPasswordState extends State<LoginPassword> {
                   String userInput = data['username'];
                   int userId = data['id'];
 
-                  userValidation.passwordLogin = data['password'];
-                  userValidation.userID = data['id'];
+                  loginController.passwordLogin = data['password'];
+                  loginController.userID = data['id'];
 
                   print(userInput);
                   print(userId.toString());
@@ -129,8 +129,8 @@ class _LoginPasswordState extends State<LoginPassword> {
                           GestureDetector(
                             onTap: () {
                               if (passwordController.text ==
-                                  userValidation.passwordLogin) {
-                                saveData(userValidation.userID!);
+                                  loginController.passwordLogin) {
+                                saveData(loginController.userID!);
                                 Get.to(HomePage());
                               } else {
                                 Get.snackbar(
@@ -166,7 +166,7 @@ class _LoginPasswordState extends State<LoginPassword> {
                                   forwardAnimationCurve:
                                       Curves.fastLinearToSlowEaseIn,
                                 );
-                                print(userValidation.passwordLogin);
+                                print(loginController.passwordLogin);
                               }
                             },
                             child: Container(
