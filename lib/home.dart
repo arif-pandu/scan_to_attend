@@ -32,12 +32,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Expanded(
-            flex: 4,
+          Container(
+            height: MediaQuery.of(context).size.height * 2 / 3,
             child: _buildQrView(context),
           ),
-          Expanded(
-            flex: 2,
+          Container(
+            height: MediaQuery.of(context).size.height * 1 / 3,
             child: FittedBox(
               fit: BoxFit.contain,
               child: Column(
