@@ -6,8 +6,8 @@ import 'package:scan_to_attend/const/const.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:scan_to_attend/home.dart';
-import 'package:scan_to_attend/login_controller.dart';
+import 'package:scan_to_attend/pages/home.dart';
+import 'package:scan_to_attend/controller/login_controller.dart';
 import 'package:scan_to_attend/widget/login_widget/password_input.dart';
 import 'package:scan_to_attend/widget/login_widget/username_input.dart';
 
@@ -141,11 +141,15 @@ class _LoginPageState extends State<LoginPage> {
                     // KALO UDAH ISI NAMA
                     : GestureDetector(
                         onTap: () {
-                          if (passwordInputController.text != '') {
-                            Get.to(HomePage());
-                          } else {
-                            WarningPassword();
-                          }
+                          setState(() {
+                            if (passwordInputController.text ==
+                                loginController.passwordLogin) {
+                              Get.to(HomePage());
+                            } else {
+                              WarningPassword();
+                              print(loginController.usernameLogin);
+                            }
+                          });
                         },
                         child: Container(
                           height: 56,
