@@ -26,6 +26,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference user = firestore.collection('user');
+    String userInput = loginController.usernameLogin;
+    Future<DocumentSnapshot<Object?>>? userData = user.doc(userInput).get();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -40,15 +45,41 @@ class _LoginPageState extends State<LoginPage> {
           // USERNAME WELCOME
           Align(
             alignment: Alignment(0, -0.5),
-            child: Text(
-              loginController.isUsernameFilled == false
-                  ? ''
-                  : "WELCOME, " + usernameInputController.text,
-              style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: "LesliesHand"),
-            ),
+            child: loginController.isUsernameFilled == true
+                // KALO UDAH NGISI USERNAME
+                ? FutureBuilder(
+                    future: userData,
+                    builder:
+                        (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      if (snapshot.data!.data() == null) {
+                        String userInput = 'Who Are You?';
+                      } else if (snapshot.data!.data() != null) {
+                        Map<String, dynamic> data =
+                            snapshot.data!.data() as Map<String, dynamic>;
+                        String userInput = data['username'];
+                        int userId = data['id'];
+                        //
+                        //
+                        loginController.passwordLogin = data['password'];
+                        loginController.userID = data['id'];
+                        //
+                        //
+                        print(userInput);
+                        print(userId.toString());
+                      }
+                      return Text(
+                        'Welcome, $userInput',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'LesliesHand',
+                          color: blackColor,
+                        ),
+                      );
+                    },
+                  )
+                // KALO BELUM NGISI USERNAME
+                : Text(""),
           ),
           //
           Center(
@@ -75,6 +106,9 @@ class _LoginPageState extends State<LoginPage> {
                         onTap: () {
                           if (usernameInputController.text != '') {
                             // FIREBASE BUAT STORE DATA USER AWAL SINI
+                            loginController.usernameLogin =
+                                usernameInputController.text;
+                            //
                             setState(() {
                               loginController.isUsernameFilled = true;
                             });
