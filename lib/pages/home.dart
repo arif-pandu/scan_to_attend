@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:scan_to_attend/const/const.dart';
 import 'package:scan_to_attend/controller/login_controller.dart';
+import 'package:scan_to_attend/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -206,11 +207,16 @@ class _HomePageState extends State<HomePage> {
     prefs.setBool('ISPRESENCE', true);
     loginController.isPresence = prefs.getBool('ISPRESENCE');
     //
-    presence.doc(timestampNow).set(
-      {
-        loginController.usernameLogin: true,
-      },
-    );
+    // presence.doc(timestampNow).set(
+    //   {
+    //     loginController.usernameLogin: true,
+    //   },
+    // );
+    presence
+        .doc(timestampNow)
+        .collection(loginController.usernameLogin)
+        .doc(loginController.usernameLogin)
+        .set({'presence': true});
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
