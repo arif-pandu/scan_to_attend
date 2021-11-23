@@ -9,4 +9,6 @@ class LoginController extends GetxController {
   bool isUsernameFilled = false;
 
   String usernameInput = '';
+
+  bool? isPresence;
 }

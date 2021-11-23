@@ -6,11 +6,14 @@ import 'package:scan_to_attend/pages/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 bool isLoggedIn = false;
+bool isPresence = false;
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   isLoggedIn = prefs.getBool("LOGGEDIN") == null ? false : true;
+  isPresence = prefs.getBool("ISPRESENCE") == null ? false : true;
   runApp(const MyApp());
 }
 
@@ -23,7 +26,15 @@ class MyApp extends StatelessWidget {
       title: "Scan to Attend",
       debugShowCheckedModeBanner: false,
       // home: QRViewExample(),
-      home: isLoggedIn == false ? LoginPage() : HomePage(),
+      home: isLoggedIn == false
+          ? LoginPage()
+          : isPresence == false
+              ? HomePage()
+              : Scaffold(
+                  body: Center(
+                    child: Text("You've already presence"),
+                  ),
+                ),
     );
   }
 }

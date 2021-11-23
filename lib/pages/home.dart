@@ -2,6 +2,7 @@
 
 import 'dart:developer';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,10 +20,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  //
+  // it'll be like this (2021-11-23)
+  String timestampNow = DateTime.now().year.toString() +
+      '-' +
+      DateTime.now().month.toString() +
+      '-' +
+      DateTime.now().day.toString();
+
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   LoginController loginController = Get.put(LoginController());
+
+  bool isAlreadyPresence = false;
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -35,14 +46,18 @@ class _HomePageState extends State<HomePage> {
     controller!.resumeCamera();
   }
 
-  @override
-  void initState() async {
-    // TODO: implement initState
-    super.initState();
+  void callUsername() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? name = prefs.getString('USERNAME');
     LoginController loginController = Get.put(LoginController());
     loginController.usernameLogin = name!;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    callUsername();
   }
 
   @override
@@ -84,8 +99,8 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: SvgPicture.asset(
-                            'assets/images/will_you_read_.svg',
+                          child: Image.asset(
+                            'assets/images/will_you_read.png',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -118,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                           width: 208,
                           decoration: BoxDecoration(
                             color: yellowColor,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(30),
                             border: Border.all(width: 3, color: blackColor),
                           ),
                           child: Center(
@@ -178,8 +193,24 @@ class _HomePageState extends State<HomePage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        onGetStoreBarcode();
       });
     });
+  }
+
+  void onGetStoreBarcode() async {
+    FirebaseFirestore firestore = await FirebaseFirestore.instance;
+    CollectionReference presence = firestore.collection('presence');
+    //
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('ISPRESENCE', true);
+    loginController.isPresence = prefs.getBool('ISPRESENCE');
+    //
+    presence.doc(timestampNow).set(
+      {
+        loginController.usernameLogin: true,
+      },
+    );
   }
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
