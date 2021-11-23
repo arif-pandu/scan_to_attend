@@ -4,12 +4,9 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   String usernameLogin = 'blank';
   String? passwordLogin;
-
   int? userID;
 
   bool isUsernameFilled = false;
-  bool isUsernameValid = false;
-  bool isUsernameMatchPassword = false;
 
   String usernameInput = '';
 }

@@ -10,6 +10,7 @@ import 'package:scan_to_attend/pages/home.dart';
 import 'package:scan_to_attend/controller/login_controller.dart';
 import 'package:scan_to_attend/widget/login_widget/password_input.dart';
 import 'package:scan_to_attend/widget/login_widget/username_input.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -62,10 +63,6 @@ class _LoginPageState extends State<LoginPage> {
                         //
                         loginController.passwordLogin = data['password'];
                         loginController.userID = data['id'];
-                        //
-                        //
-                        print(userInput);
-                        print(userId.toString());
                       }
                       return Text(
                         'Welcome, $userInput',
@@ -141,9 +138,17 @@ class _LoginPageState extends State<LoginPage> {
                     // KALO UDAH ISI NAMA
                     : GestureDetector(
                         onTap: () {
-                          setState(() {
+                          setState(() async {
                             if (passwordInputController.text ==
                                 loginController.passwordLogin) {
+                              // SHARED PREFERENCE HERE
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setInt('USERID', loginController.userID!);
+                              prefs.setString(
+                                  'USERNAME', loginController.usernameLogin);
+
+                              prefs.setBool("LOGGEDIN", true);
                               Get.to(HomePage());
                             } else {
                               WarningPassword();
