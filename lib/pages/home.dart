@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   // KALO UDAH DAPET HASIL BARCODE
                   : Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           "Welcome Back",
