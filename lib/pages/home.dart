@@ -62,6 +62,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+    loginController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -99,10 +106,12 @@ class _HomePageState extends State<HomePage> {
                           padding: EdgeInsets.all(6),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Image.asset(
-                            'assets/images/will_you_read.png',
-                            fit: BoxFit.cover,
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/images/will_you_read.png',
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                         Text(
@@ -175,6 +184,7 @@ class _HomePageState extends State<HomePage> {
     // we need to listen for Flutter SizeChanged notification and update controller
     return QRView(
       key: qrKey,
+      // DI SINI GANTI KALO UDAH ABSEN NTAR GK BERFUNGSI LAGI
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
         borderColor: Colors.red,
@@ -206,12 +216,22 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('ISPRESENCE', true);
     loginController.isPresence = prefs.getBool('ISPRESENCE');
+    DateTime now = DateTime.now();
+    DateTime today =
+        DateTime(now.year, now.month, now.day, now.hour, now.minute);
+
+    DateTime tomorrow =
+        DateTime(now.year, now.month, now.day + 1, now.hour, now.minute);
+    Future.delayed(
+      Duration(
+        minutes: today.difference(tomorrow).inMinutes.round(),
+      ),
+      () {
+        prefs.setBool('ISPRESENCE', false);
+      },
+    );
+
     //
-    // presence.doc(timestampNow).set(
-    //   {
-    //     loginController.usernameLogin: true,
-    //   },
-    // );
     presence
         .doc(timestampNow)
         .collection(loginController.usernameLogin)
@@ -226,11 +246,5 @@ class _HomePageState extends State<HomePage> {
         const SnackBar(content: Text('no Permission')),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 }

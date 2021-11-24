@@ -26,6 +26,12 @@ class _LoginPageState extends State<LoginPage> {
   LoginController loginController = Get.put(LoginController());
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
     CollectionReference user = firestore.collection('user');
