@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,7 +71,9 @@ class MyApp extends StatelessWidget {
                         ),
                         SizedBox(height: 15),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            exit(0);
+                          },
                           child: Container(
                             width: 200,
                             height: 56,

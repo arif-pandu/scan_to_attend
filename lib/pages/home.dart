@@ -71,117 +71,117 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Visibility(
-            visible: result == null ? true : false,
-            child: Container(
-              height: MediaQuery.of(context).size.height - 250,
-              width: MediaQuery.of(context).size.width,
-              child: Center(
-                child: _buildQrView(context),
-              ),
-            ),
-          ),
-          Container(
-            height: result == null ? 250 : MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: result == null
-                  ?
-                  // KALO BELUM DAPET HASI: BARCODE
-                  Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "POINT THE CAMERA AT",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Lato",
-                            color: blackColor,
-                          ),
+      body: result == null
+          ? Column(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height - 250,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                    child: _buildQrView(context),
+                  ),
+                ),
+                Container(
+                  height: 250,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(
+                      child:
+                          // KALO BELUM DAPET HASI: BARCODE
+                          Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "POINT THE CAMERA AT",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Lato",
+                          color: blackColor,
                         ),
-                        Container(
-                          height: 87,
-                          width: 87,
-                          padding: EdgeInsets.all(6),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              image: DecorationImage(
-                                image: AssetImage(
-                                    'assets/image/will_you_read.png'),
-                              ),
-                            ),
-                          ),
+                      ),
+                      Container(
+                        height: 87,
+                        width: 87,
+                        padding: EdgeInsets.all(6),
+                        child: Container(
                           decoration: BoxDecoration(
-                            color: blackColor,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                        ),
-                        Text(
-                          "QR CODE",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Lato",
-                            color: blackColor,
-                          ),
-                        ),
-                      ],
-                    )
-                  // KALO UDAH DAPET HASIL BARCODE
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Welcome Back",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Lato",
-                            color: blackColor,
-                          ),
-                        ),
-                        SizedBox(height: 15),
-                        Container(
-                          height: 56,
-                          width: 208,
-                          decoration: BoxDecoration(
-                            color: yellowColor,
-                            borderRadius: BorderRadius.circular(30),
-                            border: Border.all(width: 3, color: blackColor),
-                          ),
-                          child: Center(
-                            child: Text(
-                              loginController.usernameLogin,
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "Lato",
-                                color: blackColor,
+                            borderRadius: BorderRadius.circular(10),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                'assets/image/will_you_read.png',
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 15),
-                        Text(
-                          "Happy Your Day :)",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "Lato",
-                            color: blackColor,
-                          ),
+                        decoration: BoxDecoration(
+                          color: blackColor,
+                          borderRadius: BorderRadius.circular(15),
                         ),
-                      ],
+                      ),
+                      Text(
+                        "QR CODE",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "Lato",
+                          color: blackColor,
+                        ),
+                      ),
+                    ],
+                  )
+                      // KALO UDAH DAPET HASIL BARCODE
+
+                      ),
+                )
+              ],
+            )
+          : Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome Back",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Lato",
+                    color: blackColor,
+                  ),
+                ),
+                SizedBox(height: 15),
+                Container(
+                  height: 56,
+                  width: 208,
+                  decoration: BoxDecoration(
+                    color: yellowColor,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(width: 3, color: blackColor),
+                  ),
+                  child: Center(
+                    child: Text(
+                      loginController.usernameLogin,
+                      style: TextStyle(
+                        letterSpacing: 1,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: "Lato",
+                        color: blackColor,
+                      ),
                     ),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Text(
+                  "Happy Your Day :)",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "Lato",
+                    color: blackColor,
+                  ),
+                ),
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 
