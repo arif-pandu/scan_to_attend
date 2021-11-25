@@ -20,6 +20,11 @@ dependencies:
   shared_preferences: ^2.0.9
   flutter_svg: ^0.23.0+1
   lottie: ^1.2.1
+  flutter_launcher_icons: ^0.9.2
+
+flutter_icons:
+  android: true
+  image_path: "assets/image/launcher_icon.png"
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +43,7 @@ flutter:
   assets:
     - assets/font/
     - assets/image/
+    - assets/lottie/
 
   fonts:
     - family: Lato

@@ -156,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                                   'USERNAME', loginController.usernameLogin);
 
                               prefs.setBool("LOGGEDIN", true);
-                              Get.to(HomePage());
+                              Get.offAll(HomePage());
                             } else {
                               WarningPassword();
                               print(loginController.usernameLogin);

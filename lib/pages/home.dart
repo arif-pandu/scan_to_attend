@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors
-
+import 'package:lottie/lottie.dart';
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -85,102 +85,113 @@ class _HomePageState extends State<HomePage> {
                   height: 250,
                   width: MediaQuery.of(context).size.width,
                   child: Center(
-                      child:
-                          // KALO BELUM DAPET HASI: BARCODE
-                          Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "POINT THE CAMERA AT",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "Lato",
-                          color: blackColor,
+                    child:
+                        // KALO BELUM DAPET HASI: BARCODE
+                        Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "POINT THE CAMERA AT",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Lato",
+                            color: blackColor,
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 87,
-                        width: 87,
-                        padding: EdgeInsets.all(6),
-                        child: Container(
+                        Container(
+                          height: 87,
+                          width: 87,
+                          padding: EdgeInsets.all(6),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/image/will_you_read.png',
+                                ),
+                              ),
+                            ),
+                          ),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/image/will_you_read.png',
+                            color: blackColor,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                        ),
+                        Text(
+                          "QR CODE",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Lato",
+                            color: blackColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )
+          : Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    child: Lottie.asset('assets/lottie/checked.json'),
+                  ),
+                  SizedBox(height: 50),
+                  SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Welcome Back",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Lato",
+                            color: blackColor,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        Container(
+                          height: 56,
+                          width: 208,
+                          decoration: BoxDecoration(
+                            color: yellowColor,
+                            borderRadius: BorderRadius.circular(30),
+                            border: Border.all(width: 3, color: blackColor),
+                          ),
+                          child: Center(
+                            child: Text(
+                              loginController.usernameLogin,
+                              style: TextStyle(
+                                letterSpacing: 1,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "Lato",
+                                color: blackColor,
                               ),
                             ),
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: blackColor,
-                          borderRadius: BorderRadius.circular(15),
+                        SizedBox(height: 15),
+                        Text(
+                          "Enjoy Your Day :)",
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "Lato",
+                            color: blackColor,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "QR CODE",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "Lato",
-                          color: blackColor,
-                        ),
-                      ),
-                    ],
-                  )
-                      // KALO UDAH DAPET HASIL BARCODE
-
-                      ),
-                )
-              ],
-            )
-          : Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Welcome Back",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Lato",
-                    color: blackColor,
-                  ),
-                ),
-                SizedBox(height: 15),
-                Container(
-                  height: 56,
-                  width: 208,
-                  decoration: BoxDecoration(
-                    color: yellowColor,
-                    borderRadius: BorderRadius.circular(30),
-                    border: Border.all(width: 3, color: blackColor),
-                  ),
-                  child: Center(
-                    child: Text(
-                      loginController.usernameLogin,
-                      style: TextStyle(
-                        letterSpacing: 1,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "Lato",
-                        color: blackColor,
-                      ),
+                      ],
                     ),
                   ),
-                ),
-                SizedBox(height: 15),
-                Text(
-                  "Happy Your Day :)",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "Lato",
-                    color: blackColor,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
     );
   }

@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "You've already presence",
+                          "You've been attended today",
                           style: TextStyle(
                             letterSpacing: 1,
                             fontSize: 20,
@@ -106,6 +106,6 @@ class MyApp extends StatelessWidget {
   void LogOut() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.clear();
-    Get.to(LoginPage());
+    Get.offAll(LoginPage());
   }
 }
