@@ -39,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     Future<DocumentSnapshot<Object?>>? userData = user.doc(userInput).get();
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           // BG-SVG

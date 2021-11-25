@@ -73,15 +73,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height - 250,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: _buildQrView(context),
+          Visibility(
+            visible: result == null ? true : false,
+            child: Container(
+              height: MediaQuery.of(context).size.height - 250,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: _buildQrView(context),
+              ),
             ),
           ),
           Container(
-            height: 250,
+            height: result == null ? 250 : MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: result == null
@@ -104,14 +107,18 @@ class _HomePageState extends State<HomePage> {
                           height: 87,
                           width: 87,
                           padding: EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              image: AssetImage(
-                                'assets/images/will_you_read.png',
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              image: DecorationImage(
+                                image: AssetImage(
+                                    'assets/image/will_you_read.png'),
                               ),
-                              fit: BoxFit.cover,
                             ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: blackColor,
+                            borderRadius: BorderRadius.circular(15),
                           ),
                         ),
                         Text(
@@ -127,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   // KALO UDAH DAPET HASIL BARCODE
                   : Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Welcome Back",
@@ -138,6 +145,7 @@ class _HomePageState extends State<HomePage> {
                             color: blackColor,
                           ),
                         ),
+                        SizedBox(height: 15),
                         Container(
                           height: 56,
                           width: 208,
@@ -158,6 +166,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 15),
                         Text(
                           "Happy Your Day :)",
                           style: TextStyle(
