@@ -28,7 +28,7 @@ Or you can take a look at the projects I've made here : <a href="https://arif-pa
 <br/>
 <br/>
 <a href="https://github.com/arif-pandu/scan_to_attend">
-   <img src="screenshot.png" alt="Logo" width="200">
+   <img src="screenshot.png" alt="Logo">
 </a>
 
 
