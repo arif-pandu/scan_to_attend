@@ -27,7 +27,7 @@ For business inquiries please email me at <a href="mailto:mapanduprayoga@gmail.c
 Or you can take a look at the projects I've made here : <a href="https://arif-pandu.github.io">arif-pandu.github.io</a>
 <br/>
 <br/>
-<a href="https://github.com/arif-pandu/DaVinci-Cryptex-Game">
+<a href="https://github.com/arif-pandu/scan_to_attend">
    <img src="screenshot.png" alt="Logo" width="200">
 </a>
 
